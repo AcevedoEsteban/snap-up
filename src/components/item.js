@@ -64,4 +64,26 @@ const Item = (props) => {
         console.log(err);
       });
   };
+  const redirect = routeRedirect;
+  if (redirect) {
+    return <Redirect to="/" />;
+  }
+  const deleteItem = (itemId) => {
+    const options = {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: itemId }),
+    };
+    fetch(`http://localhost:5000/api/delete/${itemId}`, options)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setRouteRedirect(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
