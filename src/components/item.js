@@ -32,4 +32,36 @@ const Item = (props) => {
   useEffect(() => {
     getItem();
   });
+
+  const editItem = (itemId) => {
+    console.log(itemId);
+    setEditMode(!editMode);
+  };
+  const updateItem = (e) => {
+    e.preventDefault();
+    const item = {
+      itemId,
+      name: productName,
+      description,
+      image,
+      amount: price,
+    };
+    console.log(item);
+    const options = {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    };
+    fetch(`http://localhost:5000/api/update/${itemId}`, options)
+      .then((res) => res.json)
+      .then((res) => {
+        console.log(res);
+        setRouteRedirect(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
