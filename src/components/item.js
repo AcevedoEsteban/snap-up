@@ -86,4 +86,14 @@ const Item = (props) => {
         console.log(err);
       });
   };
+  let editForm;
+  if (editMode) {
+    editForm = (
+      <>
+        <form className="editform">
+          <p> updated the item values below:</p>
+        </form>
+      </>
+    );
+  }
 };
